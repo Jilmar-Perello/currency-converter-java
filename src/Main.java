@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -16,21 +17,28 @@ public class Main {
                 {"GTQ", "USD"}
         };
 
-        do {
-            System.out.print(currencyConverter.showMenu());
-            option = scanner.nextInt();
-            if (option >= 1 && option <= conversions.length) {
-                System.out.print("Ingrese el valor que desea convertir: ");
-                value = scanner.nextDouble();
-                String currencyInput = conversions[option - 1][0];
-                String currencyOutput = conversions[option - 1][1];
-                result = currencyConverter.converter(currencyInput, currencyOutput, value);
-                System.out.println(value+" ["+currencyInput+"] es igual a ["+result+"] "+currencyOutput);
-            } else if (option == 7) {
-                System.out.println("¡Gracias!");
-            } else {
-                System.out.println("Opción no válida");
+        while (true){
+            try{
+                System.out.print(currencyConverter.showMenu());
+                option = scanner.nextInt();
+                if (option >= 1 && option <= conversions.length) {
+                    System.out.print("Ingrese el valor que desea convertir: ");
+                    value = scanner.nextDouble();
+                    String currencyInput = conversions[option - 1][0];
+                    String currencyOutput = conversions[option - 1][1];
+                    result = currencyConverter.converter(currencyInput, currencyOutput, value);
+                    System.out.println(value+" ["+currencyInput+"] es igual a ["+result+"] "+currencyOutput);
+                } else if (option == 7) {
+                    System.out.println("¡Gracias!");
+                    break;
+                } else {
+                    System.out.println("Opción no válida");
+                }
+            }catch (InputMismatchException e){
+                System.out.println("Lo siento, lo que ingresaste no es válido. Intenta nuevamente.");
+                scanner.nextLine();
             }
-        } while (option!=7);
+        }
+
     }
 }

@@ -7,10 +7,9 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class ExchangeRateClient {
-
+    private static final String API_KEY = "de638bfe3c476398cec6c57a";
     public CurrencyRate CheckCurrency(String currency){
-        String key = "de638bfe3c476398cec6c57a";
-        URI direccion = URI.create("https://v6.exchangerate-api.com/v6/"+key+"/latest/"+currency);
+        URI direccion = URI.create("https://v6.exchangerate-api.com/v6/"+API_KEY+"/latest/"+currency);
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
